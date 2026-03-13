@@ -1,0 +1,52 @@
+{
+  "id": "basics-01",
+  "title": "Introduction to SQL",
+  "module": "basics",
+  "order": 1,
+  "theory": {
+    "introduction": "<p>SQL (Structured Query Language) is a standard programming language for managing and manipulating relational databases. It allows you to store, retrieve, update, and delete data in a database.</p>",
+    "sections": [
+      {
+        "title": "What is a Database?",
+        "content": "<p>A database is an organized collection of structured information, or data, typically stored electronically in a computer system. A relational database stores data in tables with rows and columns.</p><h4>Key Concepts:</h4><ul><li><strong>Table:</strong> A collection of related data organized in rows and columns</li><li><strong>Row (Record):</strong> A single entry in a table</li><li><strong>Column (Field):</strong> A specific attribute or characteristic of the data</li><li><strong>Primary Key:</strong> A unique identifier for each row</li><li><strong>Foreign Key:</strong> A field that links to a primary key in another table</li></ul>"
+      },
+      {
+        "title": "SQL Language Categories",
+        "content": "<p>SQL commands are grouped into four major categories:</p><ul><li><strong>DQL (Data Query Language):</strong> SELECT - retrieving data from databases</li><li><strong>DML (Data Manipulation Language):</strong> INSERT, UPDATE, DELETE - modifying data</li><li><strong>DDL (Data Definition Language):</strong> CREATE, ALTER, DROP - defining database structure</li><li><strong>DCL (Data Control Language):</strong> GRANT, REVOKE - controlling access to data</li></ul>"
+      },
+      {
+        "title": "Basic SELECT Syntax",
+        "content": "<p>The SELECT statement is used to query data from a database table. Here's the basic syntax:</p><pre><code>SELECT column1, column2, ...\nFROM table_name;</code></pre><p>You can also select all columns using the asterisk (*) wildcard:</p><pre><code>SELECT * FROM table_name;</code></pre>"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Select all columns",
+        "description": "Retrieve all data from the countries table",
+        "code": "SELECT * FROM countries;"
+      },
+      {
+        "title": "Select specific columns",
+        "description": "Retrieve only the name and population columns",
+        "code": "SELECT name, population FROM countries;"
+      }
+    ]
+  },
+  "exercise": {
+    "instruction": "Write a query to select all columns from the <code>cities</code> table to see all the cities in our database.",
+    "starterCode": "-- Write your query below\n",
+    "expectedColumns": ["id", "name", "country_code", "district", "population"],
+    "validation": {
+      "type": "exact",
+      "query": "SELECT * FROM cities"
+    },
+    "hint": "Use SELECT * to get all columns, and specify the table name after FROM.",
+    "solution": "SELECT * FROM cities;"
+  },
+  "learningObjectives": [
+    "Understand what SQL is and its purpose",
+    "Learn basic database terminology (table, row, column)",
+    "Write your first SELECT query"
+  ],
+  "quiz": null
+}

@@ -1,0 +1,73 @@
+{
+  "id": "basics-02",
+  "title": "SELECT Queries 101",
+  "module": "basics",
+  "order": 2,
+  "theory": {
+    "introduction": "<p>The SELECT statement is the most commonly used SQL command. It allows you to retrieve data from one or more tables in a database.</p>",
+    "sections": [
+      {
+        "title": "Selecting Specific Columns",
+        "content": "<p>Instead of retrieving all columns with *, you can specify exactly which columns you want. This is more efficient and makes your queries clearer.</p><pre><code>SELECT name, population, continent\nFROM countries;</code></pre>"
+      },
+      {
+        "title": "Using DISTINCT",
+        "content": "<p>The DISTINCT keyword removes duplicate values from your results. This is useful when you want to see unique values in a column.</p><pre><code>SELECT DISTINCT continent\nFROM countries;</code></pre><p>This query will return each continent only once, even if multiple countries are from the same continent.</p>"
+      },
+      {
+        "title": "Column Aliases (AS)",
+        "content": "<p>You can use the AS keyword to give a column a temporary name (alias) in your results. This is helpful for making output more readable.</p><pre><code>SELECT name AS country_name, \n       population AS total_people\nFROM countries;</code></pre>"
+      },
+      {
+        "title": "Arithmetic in SELECT",
+        "content": "<p>You can perform calculations directly in your SELECT statement:</p><pre><code>SELECT name, gnp, population,\n       gnp / population AS gnp_per_capita\nFROM countries;</code></pre>"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Select specific columns",
+        "description": "Get country names and their continents",
+        "code": "SELECT name, continent FROM countries;"
+      },
+      {
+        "title": "Unique continents",
+        "description": "See all unique continents in the database",
+        "code": "SELECT DISTINCT continent FROM countries;"
+      },
+      {
+        "title": "Using aliases",
+        "description": "Rename columns for better readability",
+        "code": "SELECT name AS Country, population AS Population FROM countries;"
+      }
+    ]
+  },
+  "exercise": {
+    "instruction": "Write a query that selects only the <code>name</code> and <code>email</code> columns from the <code>customers</code> table in the e-commerce database.",
+    "starterCode": "-- Select name and email from customers\n",
+    "expectedColumns": ["name", "email"],
+    "validation": {
+      "type": "columns",
+      "columns": ["name", "email"],
+      "table": "customers"
+    },
+    "hint": "List the column names separated by commas after SELECT, then specify the table after FROM.",
+    "solution": "SELECT name, email FROM customers;"
+  },
+  "learningObjectives": [
+    "Select specific columns from a table",
+    "Use DISTINCT to remove duplicates",
+    "Apply column aliases with AS",
+    "Perform basic arithmetic in queries"
+  ],
+  "quiz": {
+    "question": "Which keyword would you use to remove duplicate values from a query result?",
+    "options": [
+      "UNIQUE",
+      "DISTINCT",
+      "DIFFERENT",
+      "SINGLE"
+    ],
+    "correct": 1,
+    "explanation": "DISTINCT is the SQL keyword used to return only unique (different) values in a result set."
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "basics-03",
+  "title": "Filtering with WHERE",
+  "module": "basics",
+  "order": 3,
+  "theory": {
+    "introduction": "<p>The WHERE clause is used to filter records based on specified conditions. It allows you to extract only those records that meet certain criteria.</p>",
+    "sections": [
+      {
+        "title": "Basic WHERE Syntax",
+        "content": "<p>The WHERE clause comes after the FROM clause:</p><pre><code>SELECT column1, column2\nFROM table_name\nWHERE condition;</code></pre>"
+      },
+      {
+        "title": "Comparison Operators",
+        "content": "<p>SQL supports the following comparison operators:</p><ul><li><code>=</code> - Equal to</li><li><code>&lt;&gt;</code> or <code>!=</code> - Not equal to</li><li><code>&gt;</code> - Greater than</li><li><code>&lt;</code> - Less than</li><li><code>&gt;=</code> - Greater than or equal to</li><li><code>&lt;=</code> - Less than or equal to</li></ul><pre><code>SELECT * FROM countries\nWHERE population > 100000000;</code></pre>"
+      },
+      {
+        "title": "Logical Operators",
+        "content": "<p>Combine multiple conditions using logical operators:</p><ul><li><strong>AND</strong> - Both conditions must be true</li><li><strong>OR</strong> - At least one condition must be true</li><li><strong>NOT</strong> - Negates a condition</li></ul><pre><code>SELECT * FROM countries\nWHERE continent = 'Europe' \n  AND population > 50000000;</code></pre>"
+      },
+      {
+        "title": "BETWEEN Operator",
+        "content": "<p>The BETWEEN operator selects values within a given range (inclusive):</p><pre><code>SELECT * FROM products\nWHERE price BETWEEN 50 AND 100;</code></pre><p>This is equivalent to:</p><pre><code>SELECT * FROM products\nWHERE price >= 50 AND price <= 100;</code></pre>"
+      },
+      {
+        "title": "IN Operator",
+        "content": "<p>The IN operator allows you to specify multiple values in a WHERE clause:</p><pre><code>SELECT * FROM countries\nWHERE continent IN ('Europe', 'Asia');</code></pre><p>This is equivalent to:</p><pre><code>SELECT * FROM countries\nWHERE continent = 'Europe' OR continent = 'Asia';</code></pre>"
+      },
+      {
+        "title": "LIKE Operator",
+        "content": "<p>The LIKE operator is used to search for a specified pattern in a column:</p><ul><li><code>%</code> - Represents zero or more characters</li><li><code>_</code> - Represents exactly one character</li></ul><pre><code>-- Names starting with 'A'\nSELECT * FROM customers\nWHERE name LIKE 'A%';\n\n-- Names with 'o' as second character\nSELECT * FROM customers\nWHERE name LIKE '_o%';</code></pre>"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Filter by equality",
+        "description": "Find all countries in Europe",
+        "code": "SELECT * FROM countries WHERE continent = 'Europe';"
+      },
+      {
+        "title": "Filter by range",
+        "description": "Find products between $50 and $200",
+        "code": "SELECT * FROM products WHERE price BETWEEN 50 AND 200;"
+      },
+      {
+        "title": "Filter with LIKE",
+        "description": "Find customers whose name starts with 'J'",
+        "code": "SELECT * FROM customers WHERE name LIKE 'J%';"
+      }
+    ]
+  },
+  "exercise": {
+    "instruction": "Write a query to find all products that cost more than $100. Select the <code>name</code> and <code>price</code> columns from the <code>products</code> table.",
+    "starterCode": "-- Find products costing more than $100\n",
+    "expectedColumns": ["name", "price"],
+    "validation": {
+      "type": "condition",
+      "columns": ["name", "price"],
+      "table": "products",
+      "condition": "price > 100"
+    },
+    "hint": "Use SELECT to choose the columns, FROM to specify the table, and WHERE with the > operator to filter by price.",
+    "solution": "SELECT name, price FROM products WHERE price > 100;"
+  },
+  "learningObjectives": [
+    "Use WHERE clause to filter records",
+    "Apply comparison operators (=, <>, >, <, >=, <=)",
+    "Combine conditions with AND, OR, NOT",
+    "Use BETWEEN for range queries",
+    "Use IN for multiple values",
+    "Use LIKE for pattern matching"
+  ],
+  "quiz": {
+    "question": "What does the % wildcard represent in a LIKE pattern?",
+    "options": [
+      "Exactly one character",
+      "Zero or more characters",
+      "A decimal point",
+      "A space character"
+    ],
+    "correct": 1,
+    "explanation": "The % wildcard in LIKE patterns represents zero or more characters of any type."
+  }
+}

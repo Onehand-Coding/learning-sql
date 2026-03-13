@@ -1,0 +1,76 @@
+{
+  "id": "basics-04",
+  "title": "Sorting with ORDER BY",
+  "module": "basics",
+  "order": 4,
+  "theory": {
+    "introduction": "<p>The ORDER BY clause is used to sort the result set in ascending or descending order based on one or more columns.</p>",
+    "sections": [
+      {
+        "title": "Basic ORDER BY Syntax",
+        "content": "<p>By default, ORDER BY sorts in ascending order (ASC):</p><pre><code>SELECT name, population\nFROM countries\nORDER BY population;</code></pre><p>This is the same as:</p><pre><code>SELECT name, population\nFROM countries\nORDER BY population ASC;</code></pre>"
+      },
+      {
+        "title": "Descending Order",
+        "content": "<p>Use DESC to sort in descending order:</p><pre><code>SELECT name, population\nFROM countries\nORDER BY population DESC;</code></pre>"
+      },
+      {
+        "title": "Sorting by Multiple Columns",
+        "content": "<p>You can sort by multiple columns. The second column is used to break ties:</p><pre><code>SELECT name, continent, population\nFROM countries\nORDER BY continent ASC, population DESC;</code></pre><p>This sorts by continent first, then by population (descending) within each continent.</p>"
+      },
+      {
+        "title": "LIMIT and OFFSET",
+        "content": "<p>Use LIMIT to restrict the number of rows returned:</p><pre><code>-- Get top 5 most populous countries\nSELECT name, population\nFROM countries\nORDER BY population DESC\nLIMIT 5;</code></pre><p>Use OFFSET to skip a number of rows (useful for pagination):</p><pre><code>-- Get rows 6-10\nSELECT name, population\nFROM countries\nORDER BY population DESC\nLIMIT 5 OFFSET 5;</code></pre>"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Sort by population descending",
+        "description": "Get countries ordered by population (highest first)",
+        "code": "SELECT name, population FROM countries ORDER BY population DESC;"
+      },
+      {
+        "title": "Sort by multiple columns",
+        "description": "Sort by continent, then by name within each continent",
+        "code": "SELECT name, continent FROM countries ORDER BY continent, name;"
+      },
+      {
+        "title": "Get top 3 results",
+        "description": "Get the 3 most expensive products",
+        "code": "SELECT name, price FROM products ORDER BY price DESC LIMIT 3;"
+      }
+    ]
+  },
+  "exercise": {
+    "instruction": "Write a query to find the top 5 highest-paid employees. Select <code>first_name</code>, <code>last_name</code>, and <code>salary</code> from the <code>employees</code> and <code>salaries</code> tables. For now, just use the <code>salaries</code> table and order by salary descending, limiting to 5 results.",
+    "starterCode": "-- Get top 5 highest salaries\n",
+    "expectedColumns": ["emp_no", "salary"],
+    "validation": {
+      "type": "orderby_limit",
+      "columns": ["emp_no", "salary"],
+      "table": "salaries",
+      "orderby": "salary DESC",
+      "limit": 5
+    },
+    "hint": "SELECT the columns from salaries table, ORDER BY salary DESC, and use LIMIT 5 to get only the top 5.",
+    "solution": "SELECT emp_no, salary FROM salaries ORDER BY salary DESC LIMIT 5;"
+  },
+  "learningObjectives": [
+    "Sort results using ORDER BY",
+    "Sort in ascending (ASC) and descending (DESC) order",
+    "Sort by multiple columns",
+    "Limit results with LIMIT",
+    "Use OFFSET for pagination"
+  ],
+  "quiz": {
+    "question": "What is the default sort order of ORDER BY?",
+    "options": [
+      "Descending (DESC)",
+      "Ascending (ASC)",
+      "Random",
+      "By insertion order"
+    ],
+    "correct": 1,
+    "explanation": "ORDER BY sorts in ascending order (ASC) by default. You must explicitly specify DESC for descending order."
+  }
+}

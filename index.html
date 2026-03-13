@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Learning Platform</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/editor.css">
+    <link rel="stylesheet" href="css/tutorial.css">
+    
+    <!-- Simple SQL Editor -->
+    <script type="module" src="js/editor-simple.js"></script>
+    
+    <!-- sql.js -->
+    <script src="https://sql.js.org/dist/sql-wasm.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">📚 SQL Learning Platform</h1>
+            <nav class="nav">
+                <button class="nav-btn active" data-view="lessons">Lessons</button>
+                <button class="nav-btn" data-view="playground">Playground</button>
+                <button class="nav-btn" data-view="reference">Reference</button>
+            </nav>
+            <div class="mode-toggle">
+                <label>
+                    <input type="checkbox" id="serverModeToggle">
+                    Server Mode (PostgreSQL)
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Lessons View -->
+        <div class="view active" id="lessons-view">
+            <aside class="sidebar">
+                <h2>Curriculum</h2>
+                <div class="module" data-module="basics">
+                    <h3 class="module-title">📖 Basics</h3>
+                    <ul class="lesson-list" id="basics-list"></ul>
+                </div>
+                <div class="module" data-module="intermediate">
+                    <h3 class="module-title">🔥 Intermediate</h3>
+                    <ul class="lesson-list" id="intermediate-list"></ul>
+                </div>
+                <div class="module" data-module="advanced">
+                    <h3 class="module-title">🚀 Advanced</h3>
+                    <ul class="lesson-list" id="advanced-list"></ul>
+                </div>
+            </aside>
+            <div class="lesson-content">
+                <div class="lesson-header">
+                    <h2 id="lesson-title">Select a lesson to begin</h2>
+                    <div class="lesson-nav">
+                        <button class="btn btn-secondary" id="prevLesson">← Previous</button>
+                        <button class="btn btn-secondary" id="nextLesson">Next →</button>
+                    </div>
+                </div>
+                <div class="lesson-body">
+                    <div class="theory-section" id="theory-section">
+                        <div class="theory-content" id="theory-content">
+                            <p class="welcome-message">
+                                Welcome to the SQL Learning Platform! 
+                                Select a lesson from the sidebar to start learning SQL from basics to advanced concepts.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="exercise-section" id="exercise-section">
+                        <h3>Exercise</h3>
+                        <p class="exercise-instruction" id="exercise-instruction"></p>
+                        <div class="editor-container">
+                            <div class="editor-header">
+                                <span>SQL Editor</span>
+                                <button class="btn btn-primary" id="runQuery">▶ Run Query</button>
+                            </div>
+                            <div id="sql-editor"></div>
+                        </div>
+                        <div class="results-container">
+                            <div class="results-header">
+                                <span>Results</span>
+                                <span class="execution-time" id="execution-time"></span>
+                            </div>
+                            <div class="results-content">
+                                <div class="table-wrapper" id="table-wrapper"></div>
+                                <div class="error-message" id="error-message"></div>
+                            </div>
+                        </div>
+                        <div class="exercise-actions">
+                            <button class="btn btn-secondary" id="hintBtn">💡 Hint</button>
+                            <button class="btn btn-success" id="checkAnswer">✓ Check Answer</button>
+                            <div class="hint-box" id="hint-box"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Playground View -->
+        <div class="view" id="playground-view">
+            <div class="playground-container">
+                <div class="playground-header">
+                    <h2>SQL Playground</h2>
+                    <p>Free-form SQL editor - experiment with queries!</p>
+                    <div class="playground-controls">
+                        <select id="database-select">
+                            <option value="world">World Database</option>
+                            <option value="employees">Employees Database</option>
+                            <option value="ecommerce">E-commerce Database</option>
+                        </select>
+                        <button class="btn btn-primary" id="playgroundRun">▶ Run Query</button>
+                    </div>
+                </div>
+                <div class="editor-container full-height">
+                    <div id="playground-editor"></div>
+                </div>
+                <div class="results-container">
+                    <div class="results-header">
+                        <span>Results</span>
+                        <span class="execution-time" id="playground-time"></span>
+                    </div>
+                    <div class="results-content">
+                        <div class="table-wrapper" id="playground-table"></div>
+                        <div class="error-message" id="playground-error"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reference View -->
+        <div class="view" id="reference-view">
+            <div class="reference-container">
+                <h2>SQL Reference</h2>
+                <div class="reference-grid">
+                    <div class="reference-card">
+                        <h3>SELECT Statement</h3>
+                        <pre><code>SELECT column1, column2
+FROM table_name
+WHERE condition
+ORDER BY column
+LIMIT count;</code></pre>
+                    </div>
+                    <div class="reference-card">
+                        <h3>JOIN Types</h3>
+                        <pre><code>INNER JOIN - matching rows only
+LEFT JOIN - all left + matching
+RIGHT JOIN - all right + matching
+FULL OUTER JOIN - all rows</code></pre>
+                    </div>
+                    <div class="reference-card">
+                        <h3>Aggregate Functions</h3>
+                        <pre><code>COUNT() - count rows
+SUM() - sum values
+AVG() - average value
+MIN() - minimum value
+MAX() - maximum value</code></pre>
+                    </div>
+                    <div class="reference-card">
+                        <h3>GROUP BY</h3>
+                        <pre><code>SELECT column, COUNT(*)
+FROM table
+GROUP BY column
+HAVING COUNT(*) > 1;</code></pre>
+                    </div>
+                    <div class="reference-card">
+                        <h3>Subquery</h3>
+                        <pre><code>SELECT * FROM employees
+WHERE salary > (
+    SELECT AVG(salary) FROM employees
+);</code></pre>
+                    </div>
+                    <div class="reference-card">
+                        <h3>Window Function</h3>
+                        <pre><code>SELECT name, salary,
+       RANK() OVER (ORDER BY salary DESC)
+FROM employees;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Schema Info Modal -->
+    <div class="modal" id="schema-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Database Schema</h3>
+                <button class="close-btn" id="closeSchemaModal">&times;</button>
+            </div>
+            <div class="modal-body" id="schema-info"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
